@@ -161,7 +161,7 @@ public class Sketch extends PApplet {
    * Do NOT use 'if' statements to complete 5-8. Manipulate the loops instead
    */
   public void draw_section5(){
-
+    
   }
 
   public void draw_section6(){
@@ -169,7 +169,19 @@ public class Sketch extends PApplet {
   }
 
   public void draw_section7(){
+    int intX = 3;
+    int intY = 303;
 
+    for(int intColumn = 0; intColumn < 30; intColumn++){
+      for(int intRow = 30 - intColumn - 1; intRow >= 0; intRow--){
+        intX = (intColumn * 10) + 603;  
+        intY = (intRow * 10) + 3; 
+          fill(255);
+        noStroke();
+        rect(intX, intY, 4, 4);
+
+      }
+    }
   }
   
   public void draw_section8(){
