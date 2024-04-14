@@ -1,14 +1,19 @@
 import processing.core.PApplet;
 
+/**
+ * Draws seven different colors of stickman and hearts between
+ * @author Sierra Rajabali
+ */
 public class Sketch extends PApplet {
-	
-	
+
+
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
 	// put your size call here
-    size(1200, 600);
+    size(400, 400);
+    size(800, 400);
   }
 
   /** 
@@ -16,217 +21,77 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(45, 150, 207);
+    background(210, 255, 173);
   }
 
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    /*
-    stroke(128);
-    line(150, 25, 270, 350);  
+    // Using the methods and different colors to draw the stick men and hearts out
+    stroke(238, 7, 5);
+    rowMan(0);
+    stroke(230, 137, 15);
+    rowMan(50);
+    stroke(222, 230, 9);
+    rowMan(100);
+    stroke(59, 160, 43);
+    rowMan(150);
+    stroke(0, 103, 171);
+    rowMan(200);
+    stroke(0, 19, 223);
+    rowMan(250);
+    stroke(137, 0, 224);
+    rowMan(300);
 
-    stroke(255);
-    line(50, 125, 70, 50);  
-*/
-    draw_section_outlines();
-    draw_section1();
-    draw_section2();
-    draw_section3();
-    draw_section4();
-	  
-    draw_section5();
-    draw_section6();
-    draw_section7();
-    draw_section8();
 
-    
+  // drawing out the hearts
+  for (int y = 1; y < 7; y++) {
+    int xBalance = (y % 2) * 50; // Calculate balance once per row
+    for (int x = 50; x < 700; x += 100) {
+        drawHeart(x + xBalance, y * 50);
+    }
   }
-
-
+}
   /**
-   * Draw the outlines for all sections
+   * Draws 15 stickmen in a row where the y-coordinate is put.
+   * @param y y-coordinates of row
+   * @author Sierra Rajabali
    */
-  public void draw_section_outlines(){
-    stroke(0);
-    noFill();
-
-    // draw bottom row boxes
-    rect(0,300, 300, 300);
-    rect(300, 300, 300, 300);
-    rect(600, 300, 300, 300);
-    rect(900, 300, 300, 300);
-
-    // draw top row boxes
-    rect(0,0, 300, 300);
-    rect(300, 0, 300, 300);
-    rect(600, 0, 300, 300);
-    rect(900, 0, 300, 300);
-  }
-  
-  /**
-   * draws the bottom left section
-   */
-  public void draw_section1(){
-    int intX = 0;
-    int intY = 0;
-
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = 0; intColumn < 30; intColumn++){
-        intX = (intColumn * 10) + 3;  
-        intY = (intRow * 10) + 303; 
-        fill(255);
-        noStroke();
-        rect(intX, intY, 5, 5);
-
-      }
+  private void rowMan(int y) {
+    for(int x = 0; x < 750; x += 50){
+      drawMan(x, y);
     }
   }
 
   /**
-   * Use the modulus operator and an if statement to select the color
-   * Don't loop from 30 to 60 to shift everything over, just add 300 to x.
+   * Draws a stickman at specified coordinates.
+   * @param x  x-coordinate for the stickman
+   * @param y  y-coordinate for the stickman
+   * @author J. Lau
    */
-  public void draw_section2(){
-    int intX = 0;
-    int intY = 0;
 
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = 0; intColumn < 30; intColumn++){
-        intX = (intColumn * 10) + 303;  
-        intY = (intRow * 10) + 303; 
-        if ((intColumn) % 2 == 0) {
-          fill(255);
-        } else {
-          fill(0);
-        }
-        noStroke();
-        rect(intX, intY, 5, 5);
+   private void drawMan(int x, int y) {
+    int baseX = 50 + x;
+    int baseY = y;
 
-      }
-    }
-  }
+    fill(210, 255, 173); // set color for the stick figure
+    line(baseX, 40 + baseY, baseX, 55 + baseY); // body of figure
+    line(baseX, 55 + baseY, 60 + x, 65 + baseY); // right leg
+    line(baseX, 55 + baseY, 40 + x, 65 + baseY); // left leg
+    ellipse(baseX, 30 + baseY, 15, 15); // head of stick figure
+    line(baseX, 50 + baseY, 60 + x, 40 + baseY); // right arm
+    line(baseX, 50 + baseY, 40 + x, 40 + baseY); // left arm
+}
 
   /**
-   * Use the modulus operator and an if/else statement to select the color.
-   * Don't use multiple 'if' statements.
+   * Draws a heart out
+   * @param x x-coordinates of where heart is drawn + 17
+   * @param y y-coordinates of where heart is drawn + 10
+   * @author Sierra Rajabali
    */
-  public void draw_section3(){
-    int intX = 0;
-    int intY = 0;
-
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = 0; intColumn < 30; intColumn++){
-        intX = (intColumn * 10) + 603;  
-        intY = (intRow * 10) + 303; 
-        if ((intRow) % 2 == 0) {
-          fill(255);
-        } else {
-          fill(0);
-        }
-        noStroke();
-        rect(intX, intY, 4, 4);
-
-      }
-    }
+  private void drawHeart(int x, int y) {
+    stroke(0); // outline
+    fill(0); // set fill black
+    triangle(17 + x, 10 + y, 25 + x, 20 + y, 33 + x, 10 + y);
+    triangle(17 + x, 10 + y, 21 + x, 5 + y, 25 + x, 10 + y);
+    triangle(25 + x, 10 + y, 29 + x, 5 + y, 33 + x, 10 + y);
   }
-
-  /**
-   * Use the modulus operator and just one 'if' statement to select the color.
-   */
-  public void draw_section4(){
-    int intX = 0;
-    int intY = 0;
-
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = 0; intColumn < 30; intColumn++){
-        intX = (intColumn * 10) + 903;  
-        intY = (intRow * 10) + 303; 
-        if ((intRow * intColumn) % 2 == 0) {
-          fill(0);
-        } else {
-          fill(255);
-        }
-        noStroke();
-        rect(intX, intY, 4, 4);
-
-      }
-    }
-  }
-
-  /**
-   * Do NOT use 'if' statements to complete 5-8. Manipulate the loops instead
-   */
-  public void draw_section5(){
-    int intX = 0;
-    int intY = 0;
-
-    for(int intRow = 0; intRow < 30; intRow++){
-      for(int intColumn = (30 - intRow); intColumn < 30; intColumn++){
-        intX = 3 + intColumn * 10;  
-        intY = 3 + intRow * 10; 
-        fill(255);
-        noStroke();
-        rect(intX, intY, 4, 4);
-
-      }
-    }
-  }
-
-  public void draw_section6(){
-    int intX = 3;
-    int intY = 303;
-
-    for(int intRow = 0; intRow <= 30; intRow++){
-      for(int intColumn = 0; intColumn < intRow; intColumn++){
-        intX = (intColumn * 10) + 303;  
-        fill(255);
-        noStroke();
-        rect(intX, intY, 4, 4);
-
-      }
-      intY = (intRow * 10) + 3;
-    }
-  }
-
-  public void draw_section7(){
-    int intX = 3;
-    int intY = 303;
-
-    for(int intColumn = 0; intColumn < 30; intColumn++){
-      for(int intRow = 30 - intColumn - 1; intRow >= 0; intRow--){
-        intX = (intColumn * 10) + 603;  
-        intY = (intRow * 10) + 3; 
-        fill(255);
-        noStroke();
-        rect(intX, intY, 4, 4);
-
-      }
-    }
-  }
-  
-  public void draw_section8(){
-    int intX = 3;
-    int intY =  303;
-
-    for (int intRow = 0; intRow <= 30; intRow++) {
-      for (int intColumn = 0; intColumn <= intRow; intColumn++) {
-        intX = (intRow * 10)+ 903;
-        intY = (intColumn * 10)+ 3 ;
-        fill(255);
-        noStroke();
-        rect(intX, intY, 4, 4);
-      }
-    }
-
-  }
-
-
-
-
-
-
 }
